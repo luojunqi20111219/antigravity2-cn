@@ -1,5 +1,7 @@
 # Antigravity 繁體中文化補丁
 
+👉 **[简体中文版说明文档 (Simplified Chinese README)](README.md)**
+
 本資料夾由社群貢獻，將原版簡體中文漢化包改寫為**繁體中文**版本。
 
 ## 檔案說明

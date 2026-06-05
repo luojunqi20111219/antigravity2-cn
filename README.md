@@ -1,5 +1,7 @@
 # Antigravity 2.0 智能编程中文语言包 & 汉化引擎
 
+👉 **[繁體中文版說明文件 (Traditional Chinese README)](README_TW.md)**
+
 > **支持系统**：Windows & macOS (均已内置一键脚本)  
 > **匹配版本**：Antigravity v2.0.11  
 > **核心引擎**：Node.js (无需安装 Python，零依赖，极速极稳)  
