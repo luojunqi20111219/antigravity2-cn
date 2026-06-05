@@ -10,7 +10,7 @@ timeout /t 2 /nobreak >nul
 echo.
 echo [2/3] Injecting localization...
 cd /d "%~dp0"
-node localization_engine.js %*
+node localization_engine.js --tw %*
 if %errorlevel% neq 0 (
     echo ERROR: node.js failed. Make sure Node.js is installed.
     pause
