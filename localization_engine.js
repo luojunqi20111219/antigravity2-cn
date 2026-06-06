@@ -236,6 +236,10 @@ function generateJs() {
                     newVal = valNorm.replace(/^Yes, and always allow '(.+)'$/i, (match, cmd) => {
                         return ${USE_TW ? '"是，且一律允許執行 \'" + cmd + "\'"' : '"是，且始终允许运行 \'" + cmd + "\'"'};
                     });
+                } else if (/^(\d+) tools? enabled$/i.test(valNorm)) {
+                    newVal = valNorm.replace(/^(\d+) tools? enabled$/i, (match, num) => {
+                        return ${USE_TW ? 'num + " 個工具已啟用"' : 'num + " 个工具已启用"'};
+                    });
                 } else {
                     // 2. 长句子串滑动替换
                     for (const [key, translated] of longEntries) {
