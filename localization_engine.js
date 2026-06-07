@@ -236,9 +236,34 @@ function generateJs() {
                     newVal = valNorm.replace(/^Yes, and always allow '(.+)'$/i, (match, cmd) => {
                         return ${USE_TW ? '"是，且一律允許執行 \'" + cmd + "\'"' : '"是，且始终允许运行 \'" + cmd + "\'"'};
                     });
-                } else if (/^(\d+) tools? enabled$/i.test(valNorm)) {
-                    newVal = valNorm.replace(/^(\d+) tools? enabled$/i, (match, num) => {
+                } else if (/^(\\d+) tools? enabled$/i.test(valNorm)) {
+                    newVal = valNorm.replace(/^(\\d+) tools? enabled$/i, (match, num) => {
                         return ${USE_TW ? 'num + " 個工具已啟用"' : 'num + " 个工具已启用"'};
+                    });
+                } else if (/^Show (\\d+) more\\.\\.\\.$/i.test(valNorm)) {
+                    newVal = valNorm.replace(/^Show (\\d+) more\\.\\.\\.$/i, (match, num) => {
+                        return ${USE_TW ? '"顯示另外 " + num + " 個..."' : '"显示另外 " + num + " 个..."'};
+                    });
+                } else if (/^See all \\((\\d+)\\)$/i.test(valNorm)) {
+                    newVal = valNorm.replace(/^See all \\((\\d+)\\)$/i, (match, num) => {
+                        return ${USE_TW ? '"顯示全部 (" + num + ")"' : '"显示全部 (" + num + ")"'};
+                    });
+                } else if (/^Available AI Credits: (\\d+)$/i.test(valNorm)) {
+                    newVal = valNorm.replace(/^Available AI Credits: (\\d+)$/i, (match, num) => {
+                        return ${USE_TW ? '"可用 AI 額度: " + num' : '"可用 AI 额度: " + num'};
+                    });
+                } else if (/^(\\d+)(s|m|h|d|w|mo|yr)$/i.test(valNorm)) {
+                    newVal = valNorm.replace(/^(\\d+)(s|m|h|d|w|mo|yr)$/i, (match, num, unit) => {
+                        const unitLower = unit.toLowerCase();
+                        let unitStr = "";
+                        if (unitLower === "s") unitStr = ${USE_TW ? '"秒前"' : '"秒前"'};
+                        else if (unitLower === "m") unitStr = ${USE_TW ? '"分鐘前"' : '"分钟前"'};
+                        else if (unitLower === "h") unitStr = ${USE_TW ? '"小時前"' : '"小时前"'};
+                        else if (unitLower === "d") unitStr = ${USE_TW ? '"天前"' : '"天前"'};
+                        else if (unitLower === "w") unitStr = ${USE_TW ? '"週前"' : '"周前"'};
+                        else if (unitLower === "mo") unitStr = ${USE_TW ? '"個月前"' : '"个月前"'};
+                        else if (unitLower === "yr") unitStr = ${USE_TW ? '"年前"' : '"年前"'};
+                        return num + unitStr;
                     });
                 } else {
                     // 2. 长句子串滑动替换
