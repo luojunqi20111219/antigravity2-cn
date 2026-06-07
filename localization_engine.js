@@ -265,6 +265,14 @@ function generateJs() {
                         else if (unitLower === "yr") unitStr = ${USE_TW ? '"年前"' : '"年前"'};
                         return num + unitStr;
                     });
+                } else if (/^(.+?): context deadline exceeded$/i.test(valNorm)) {
+                    newVal = valNorm.replace(/^(.+?): context deadline exceeded$/i, (match, prefix) => {
+                        return prefix + ${USE_TW ? '": 請求超時 (context deadline exceeded)"' : '": 请求超时 (context deadline exceeded)"'};
+                    });
+                } else if (/^(.+?): i\\/o timeout$/i.test(valNorm)) {
+                    newVal = valNorm.replace(/^(.+?): i\\/o timeout$/i, (match, prefix) => {
+                        return prefix + ${USE_TW ? '": I\\/O 超時 (i\\/o timeout)"' : '": I\\/O 超时 (i\\/o timeout)"'};
+                    });
                 } else {
                     // 2. 长句子串滑动替换
                     for (const [key, translated] of longEntries) {
